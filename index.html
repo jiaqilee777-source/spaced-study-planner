@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spaced Study Planner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Spaced Study Planner</h1>
+  <p>Plan short, spaced study sessions instead of cramming.</p>
+
+  <label>
+    Course Name:
+    <input id="courseName" type="text" />
+  </label>
+  <br /><br />
+
+  <label>
+    Due Date:
+    <input id="dueDate" type="date" />
+  </label>
+  <br /><br />
+
+  <label>
+    Daily Study Minutes:
+    <input id="dailyMinutes" type="number" value="45" />
+  </label>
+  <br /><br />
+
+  <button onclick="generate()">Generate Schedule</button>
+
+  <h2>Schedule</h2>
+  <ul id="output"></ul>
+
+  <script src="script.js"></script>
+</body>
+</html>
