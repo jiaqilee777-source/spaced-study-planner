@@ -21,24 +21,11 @@ body{
   color: var(--text);
 }
 
-.container{
-  width:min(980px, 92vw);
-  margin: 0 auto;
-}
+.container{ width:min(1040px, 92vw); margin:0 auto; }
+header{ padding: 26px 0 10px; }
 
-header{
-  padding: 26px 0 10px;
-}
-
-.brand h1{
-  margin: 0;
-  font-size: 28px;
-  letter-spacing: .2px;
-}
-.subtitle{
-  margin: 6px 0 0;
-  color: var(--muted);
-}
+.brand h1{ margin:0; font-size: 28px; letter-spacing: .2px; }
+.subtitle{ margin:6px 0 0; color: var(--muted); }
 
 .grid{
   display:grid;
@@ -46,9 +33,8 @@ header{
   grid-template-columns: 1fr;
   padding: 14px 0 22px;
 }
-
-@media (min-width: 860px){
-  .grid{ grid-template-columns: 1fr 1fr; }
+@media (min-width: 920px){
+  .grid{ grid-template-columns: 1fr 1.05fr; }
 }
 
 .card{
@@ -59,10 +45,9 @@ header{
   padding: 18px;
 }
 
-.card h2{
-  margin: 0 0 14px;
-  font-size: 18px;
-}
+.card h2{ margin:0 0 14px; font-size: 18px; }
+.smallTitle{ margin: 0 0 8px; font-size: 14px; color: var(--text); }
+.small{ font-size: 12px; }
 
 .cardHeader{
   display:flex;
@@ -74,18 +59,13 @@ header{
 .chip{
   border: 1px solid var(--border);
   background: rgba(255,255,255,.03);
-  color: var(--text);
   border-radius: 999px;
   padding: 6px 10px;
   font-size: 12px;
   white-space: nowrap;
 }
 
-.field{
-  display:block;
-  margin-bottom: 12px;
-}
-
+.field{ display:block; margin-bottom: 12px; }
 .field span{
   display:block;
   font-size: 13px;
@@ -108,22 +88,14 @@ input:focus, select:focus{
   box-shadow: 0 0 0 3px rgba(79,140,255,.15);
 }
 
-.row{
-  display:grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
+.hint{ display:block; margin-top:6px; color: var(--muted); font-size: 12px; }
+.muted{ color: var(--muted); }
 
-@media (min-width: 520px){
-  .row{ grid-template-columns: 1fr 1fr; }
-}
+.row{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 560px){ .row{ grid-template-columns: 1fr 1fr; } }
 
-.hint{
-  display:block;
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 12px;
-}
+.row3{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 720px){ .row3{ grid-template-columns: 1fr 1fr 1fr; } }
 
 .actions{
   display:flex;
@@ -141,49 +113,52 @@ input:focus, select:focus{
   cursor:pointer;
   font-weight: 600;
 }
-
 .btn:hover{ filter: brightness(1.08); }
+.btn.primary{ border-color: rgba(79,140,255,.6); background: rgba(79,140,255,.18); }
+.btn.danger{ border-color: rgba(255,90,110,.5); background: rgba(255,90,110,.14); }
 
-.btn.primary{
-  border-color: rgba(79,140,255,.6);
-  background: rgba(79,140,255,.18);
-}
-
-.btn.danger{
-  border-color: rgba(255,90,110,.5);
-  background: rgba(255,90,110,.14);
-}
-
-.status{
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  min-height: 18px;
-}
+.status{ margin: 10px 0 0; color: var(--muted); font-size: 13px; min-height: 18px; }
 
 .empty{
   border: 1px dashed rgba(255,255,255,.14);
   border-radius: 14px;
   padding: 14px;
-  color: var(--text);
 }
 
-.muted{ color: var(--muted); }
-
-.schedule{
-  margin: 12px 0 0 18px;
-  padding: 0;
+.divider{
+  height: 1px;
+  background: rgba(255,255,255,.08);
+  margin: 16px 0;
 }
 
-.schedule li{
-  margin: 10px 0;
-  padding: 10px 12px;
+.dayCard{
   border: 1px solid var(--border);
   border-radius: 14px;
   background: rgba(255,255,255,.02);
+  padding: 12px;
+  margin: 12px 0;
 }
 
-.schedule .meta{
+.dayHeader{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 6px;
+}
+.dayHeader strong{ font-size: 14px; }
+.dayHeader span{ font-size: 12px; color: var(--muted); }
+
+.taskList{ margin: 10px 0 0; padding: 0; list-style: none; }
+.taskItem{
+  padding: 10px 10px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.02);
+  border-radius: 12px;
+  margin: 8px 0;
+}
+
+.meta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
@@ -199,19 +174,4 @@ input:focus, select:focus{
   background: rgba(255,255,255,.03);
 }
 
-.today{
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 12px;
-  background: rgba(255,255,255,.02);
-}
-
-.divider{
-  height: 1px;
-  background: rgba(255,255,255,.08);
-  margin: 16px 0;
-}
-
-.footer{
-  padding: 10px 0 26px;
-}
+.footer{ padding: 10px 0 26px; }

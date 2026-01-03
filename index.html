@@ -3,37 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Spaced Study Planner</title>
+  <title>Spaced Study Planner Pro</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="container">
     <div class="brand">
-      <h1>Spaced Study Planner</h1>
-      <p class="subtitle">Plan short, spaced study sessions instead of cramming.</p>
+      <h1>Spaced Study Planner Pro</h1>
+      <p class="subtitle">Spaced learning + time-blocking + task breakdown.</p>
     </div>
   </header>
 
   <main class="container grid">
     <section class="card">
-      <h2>Create a Plan</h2>
+      <h2>Build Your Plan</h2>
 
       <form id="planForm" autocomplete="off">
         <label class="field">
-          <span>Course / Task Name</span>
-          <input id="courseName" type="text" placeholder="e.g., PC101 Week 4 Essay" required />
+          <span>Course / Project Name</span>
+          <input id="courseName" type="text" placeholder="e.g., PC101 Basic Essay" required />
         </label>
 
         <label class="field">
           <span>Due Date</span>
           <input id="dueDate" type="date" required />
-          <small class="hint">Choose the deadline day.</small>
+          <small class="hint">Choose the deadline day shown in Canvas.</small>
         </label>
 
         <div class="row">
           <label class="field">
-            <span>Daily Study Minutes</span>
-            <input id="dailyMinutes" type="number" min="10" step="5" value="45" required />
+            <span>Study Minutes per Session</span>
+            <input id="sessionMinutes" type="number" min="10" step="5" value="45" required />
             <small class="hint">Typical: 30–90</small>
           </label>
 
@@ -44,14 +44,82 @@
               <option value="medium" selected>Medium</option>
               <option value="hard">Hard</option>
             </select>
-            <small class="hint">Hard = more repetition.</small>
+            <small class="hint">Hard = more sessions + more review.</small>
+          </label>
+        </div>
+
+        <div class="row">
+          <label class="field">
+            <span>Preferred Study Time</span>
+            <select id="preference">
+              <option value="evening" selected>Evening (default)</option>
+              <option value="morning">Morning</option>
+              <option value="lunch">Lunch break</option>
+            </select>
+            <small class="hint">We will place sessions in this time window when possible.</small>
+          </label>
+
+          <label class="field">
+            <span>Time Zone (for calendar export)</span>
+            <select id="timezone">
+              <option value="America/Chicago" selected>America/Chicago (Central)</option>
+              <option value="America/New_York">America/New_York (Eastern)</option>
+              <option value="America/Denver">America/Denver (Mountain)</option>
+              <option value="America/Los_Angeles">America/Los_Angeles (Pacific)</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3 class="smallTitle">Availability (Optional)</h3>
+        <p class="muted small">If you work shifts, enter your typical hours. Planner will schedule study after work.</p>
+
+        <div class="row3">
+          <label class="field">
+            <span>Work Start (Mon–Fri)</span>
+            <input id="workStart" type="time" value="09:00" />
+          </label>
+          <label class="field">
+            <span>Work End (Mon–Fri)</span>
+            <input id="workEnd" type="time" value="17:00" />
+          </label>
+          <label class="field">
+            <span>Off Days</span>
+            <input id="offDays" type="text" placeholder="e.g., Sat,Sun" />
+            <small class="hint">Use short names: Mon,Tue,Wed,Thu,Fri,Sat,Sun</small>
+          </label>
+        </div>
+
+        <div class="row3">
+          <label class="field">
+            <span>Gathering Day (Optional)</span>
+            <select id="gatherDay">
+              <option value="">—</option>
+              <option>Mon</option><option>Tue</option><option>Wed</option>
+              <option>Thu</option><option>Fri</option><option>Sat</option><option>Sun</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Gathering Start</span>
+            <input id="gatherStart" type="time" value="19:00" />
+          </label>
+          <label class="field">
+            <span>Gathering Minutes</span>
+            <input id="gatherMinutes" type="number" min="30" step="15" value="60" />
           </label>
         </div>
 
         <div class="actions">
-          <button type="submit" class="btn primary">Generate Schedule</button>
-          <button type="button" id="saveBtn" class="btn">Save Plan</button>
+          <button type="submit" class="btn primary">Generate Time-Blocked Plan</button>
+          <button type="button" id="saveBtn" class="btn">Save</button>
+          <button type="button" id="loadBtn" class="btn">Load</button>
           <button type="button" id="clearBtn" class="btn danger">Clear</button>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="exportBtn" class="btn">Export Calendar (.ics)</button>
+          <button type="button" id="copyBtn" class="btn">Copy Plan Text</button>
         </div>
 
         <p id="status" class="status" aria-live="polite"></p>
@@ -60,29 +128,22 @@
 
     <section class="card">
       <div class="cardHeader">
-        <h2>Your Schedule</h2>
-        <div class="chip" id="daysLeftChip" title="Days left until due date">—</div>
+        <h2>Detailed Schedule</h2>
+        <div class="chip" id="daysLeftChip">—</div>
       </div>
 
       <div id="emptyState" class="empty">
-        <p>No schedule yet.</p>
-        <p class="muted">Fill the form and generate your spaced plan.</p>
+        <p>No plan yet.</p>
+        <p class="muted">Generate a time-blocked schedule with specific tasks.</p>
       </div>
 
-      <ol id="scheduleList" class="schedule" hidden></ol>
-
-      <div class="divider"></div>
-
-      <h3>Today’s Focus</h3>
-      <div id="todayBox" class="today">
-        <p class="muted">Generate a schedule to see today’s recommended session.</p>
-      </div>
+      <div id="scheduleWrap" hidden></div>
     </section>
   </main>
 
   <footer class="container footer">
     <p class="muted">
-      Built for practicing distributed learning (spacing effect). Data stays in your browser if you save.
+      Pro tip: Use small sessions + active recall. This app stores data locally if you save.
     </p>
   </footer>
 
