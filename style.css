@@ -1,22 +1,217 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
-  padding: 40px;
+:root{
+  --bg:#0b0f17;
+  --card:#121a28;
+  --text:#e7edf7;
+  --muted:#a8b4c7;
+  --border:#22304a;
+  --primary:#4f8cff;
+  --danger:#ff5a6e;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 16px;
 }
 
-h1 {
-  color: #2c3e50;
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(79,140,255,.20), transparent 60%),
+              radial-gradient(900px 500px at 90% 30%, rgba(255,90,110,.12), transparent 55%),
+              var(--bg);
+  color: var(--text);
 }
 
-button {
-  padding: 8px 12px;
-  background-color: #4f8cff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.container{
+  width:min(980px, 92vw);
+  margin: 0 auto;
 }
 
-button:hover {
-  background-color: #3b6fdc;
+header{
+  padding: 26px 0 10px;
+}
+
+.brand h1{
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: .2px;
+}
+.subtitle{
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.grid{
+  display:grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+  padding: 14px 0 22px;
+}
+
+@media (min-width: 860px){
+  .grid{ grid-template-columns: 1fr 1fr; }
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.card h2{
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+
+.cardHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.chip{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.field{
+  display:block;
+  margin-bottom: 12px;
+}
+
+.field span{
+  display:block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input, select{
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus, select:focus{
+  border-color: rgba(79,140,255,.7);
+  box-shadow: 0 0 0 3px rgba(79,140,255,.15);
+}
+
+.row{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 520px){
+  .row{ grid-template-columns: 1fr 1fr; }
+}
+
+.hint{
+  display:block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor:pointer;
+  font-weight: 600;
+}
+
+.btn:hover{ filter: brightness(1.08); }
+
+.btn.primary{
+  border-color: rgba(79,140,255,.6);
+  background: rgba(79,140,255,.18);
+}
+
+.btn.danger{
+  border-color: rgba(255,90,110,.5);
+  background: rgba(255,90,110,.14);
+}
+
+.status{
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.empty{
+  border: 1px dashed rgba(255,255,255,.14);
+  border-radius: 14px;
+  padding: 14px;
+  color: var(--text);
+}
+
+.muted{ color: var(--muted); }
+
+.schedule{
+  margin: 12px 0 0 18px;
+  padding: 0;
+}
+
+.schedule li{
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255,255,255,.02);
+}
+
+.schedule .meta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.badge{
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgba(255,255,255,.03);
+}
+
+.today{
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255,255,255,.02);
+}
+
+.divider{
+  height: 1px;
+  background: rgba(255,255,255,.08);
+  margin: 16px 0;
+}
+
+.footer{
+  padding: 10px 0 26px;
 }

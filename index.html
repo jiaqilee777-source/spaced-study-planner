@@ -7,31 +7,84 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Spaced Study Planner</h1>
-  <p>Plan short, spaced study sessions instead of cramming.</p>
+  <header class="container">
+    <div class="brand">
+      <h1>Spaced Study Planner</h1>
+      <p class="subtitle">Plan short, spaced study sessions instead of cramming.</p>
+    </div>
+  </header>
 
-  <label>
-    Course Name:
-    <input id="courseName" type="text" />
-  </label>
-  <br /><br />
+  <main class="container grid">
+    <section class="card">
+      <h2>Create a Plan</h2>
 
-  <label>
-    Due Date:
-    <input id="dueDate" type="date" />
-  </label>
-  <br /><br />
+      <form id="planForm" autocomplete="off">
+        <label class="field">
+          <span>Course / Task Name</span>
+          <input id="courseName" type="text" placeholder="e.g., PC101 Week 4 Essay" required />
+        </label>
 
-  <label>
-    Daily Study Minutes:
-    <input id="dailyMinutes" type="number" value="45" />
-  </label>
-  <br /><br />
+        <label class="field">
+          <span>Due Date</span>
+          <input id="dueDate" type="date" required />
+          <small class="hint">Choose the deadline day.</small>
+        </label>
 
-  <button onclick="generate()">Generate Schedule</button>
+        <div class="row">
+          <label class="field">
+            <span>Daily Study Minutes</span>
+            <input id="dailyMinutes" type="number" min="10" step="5" value="45" required />
+            <small class="hint">Typical: 30–90</small>
+          </label>
 
-  <h2>Schedule</h2>
-  <ul id="output"></ul>
+          <label class="field">
+            <span>Difficulty</span>
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+            <small class="hint">Hard = more repetition.</small>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">Generate Schedule</button>
+          <button type="button" id="saveBtn" class="btn">Save Plan</button>
+          <button type="button" id="clearBtn" class="btn danger">Clear</button>
+        </div>
+
+        <p id="status" class="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="cardHeader">
+        <h2>Your Schedule</h2>
+        <div class="chip" id="daysLeftChip" title="Days left until due date">—</div>
+      </div>
+
+      <div id="emptyState" class="empty">
+        <p>No schedule yet.</p>
+        <p class="muted">Fill the form and generate your spaced plan.</p>
+      </div>
+
+      <ol id="scheduleList" class="schedule" hidden></ol>
+
+      <div class="divider"></div>
+
+      <h3>Today’s Focus</h3>
+      <div id="todayBox" class="today">
+        <p class="muted">Generate a schedule to see today’s recommended session.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p class="muted">
+      Built for practicing distributed learning (spacing effect). Data stays in your browser if you save.
+    </p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
